@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+  
+.content {
+    position: relative;
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+  
+.introduction {
+    position: relative;
+    line-height: 1.8;
+    font-size: 1.2em;
+    word-wrap: break-word;
+    z-index: 0;
+}
+  
+.line-bar {
+    position: absolute;
+    background: black;
+    pointer-events: none;
+    z-index: 1;
+}
