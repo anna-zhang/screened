@@ -1,4 +1,4 @@
-const internetFreedomScore = 90 // Adjust from 0 to 100 (0 = fully obscured, 100 = fully visible)
+const internetFreedomScore = 0 // Adjust this from 0 to 100 (0 = fully obscured, 100 = fully visible)
 
 const introSection = document.getElementById('intro-section')
 
@@ -35,15 +35,9 @@ function createBars () {
   const textNodes = introSection.querySelectorAll('span')
 
   // Calculate the bar height based on the internetFreedomScore
-  const fontSize = parseFloat(window.getComputedStyle(introSection).fontSize)
   const lineHeight = parseFloat(
     window.getComputedStyle(introSection).lineHeight
   )
-  const characterHeight = fontSize // Approximate character height
-  const barHeight =
-    internetFreedomScore === 0
-      ? characterHeight
-      : characterHeight * (1 - internetFreedomScore / 100) // Fully obscure if score is 0
 
   // Create bars for each line
   textNodes.forEach(node => {
@@ -54,11 +48,20 @@ function createBars () {
       const lineBar = document.createElement('div')
       lineBar.classList.add('line-bar')
 
+      // Use the full bounding box height of the text node
+      const characterHeight = rect.height
+
+      // Calculate bar height based on internetFreedomScore
+      const barHeight =
+        internetFreedomScore === 0
+          ? characterHeight
+          : characterHeight * (1 - internetFreedomScore / 100)
+
       // Position the bar over the text node's bounding box
       lineBar.style.width = `${rect.width}px`
       lineBar.style.height = `${barHeight}px`
 
-      // Center the bar vertically with the text
+      // If the internetFreedomScore is 0, fully cover the text by setting barHeight equal to characterHeight
       const topPosition =
         rect.top + (rect.height - barHeight) / 2 + window.scrollY // Center the bar vertically
       lineBar.style.left = `${rect.left}px`
