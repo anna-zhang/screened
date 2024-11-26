@@ -1,12 +1,14 @@
-const internetFreedomScore = 0 // Adjust this from 0 to 100 (0 = fully obscured, 100 = fully visible)
+const internetFreedomScore = 0 // Adjust this from 0 to 100 (0 = fully obscured with a bar, 100 = fully visible)
+const accessScore = 10 // Adjust this from 0 to 100 (0 = all characters hidden with a dot, 100 = fully visible)
 
+// === Internet Freedom Visualization for Intro Section ===
 const introSection = document.getElementById('intro-section')
 
 // Wrap text nodes in span elements for proper rect calculation
-function wrapTextNodes () {
+function wrapTextNodes (element) {
   const textNodes = []
   const walk = document.createTreeWalker(
-    introSection,
+    element,
     NodeFilter.SHOW_TEXT,
     null,
     false
@@ -73,11 +75,64 @@ function createBars () {
 }
 
 // Initial render
-wrapTextNodes() // Wrap text nodes in span elements before creating bars
+wrapTextNodes(introSection) // Wrap text nodes in span elements before creating bars
 createBars()
 
 // Recalculate bars on window resize
 window.addEventListener('resize', () => {
-  wrapTextNodes() // Wrap text nodes again to handle any changes due to resizing
+  wrapTextNodes(introSection)
   createBars()
 })
+
+// === Obstacles to Access Effect ===
+const accessSection = document.getElementById('access-section')
+function applyAccessEffect () {
+  // Operate directly on all visible text nodes to leave the HTML tag structure (h2, p, etc.) intact
+  function extractTextNodes (element) {
+    const nodes = []
+    const walk = document.createTreeWalker(
+      element,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    )
+
+    while (walk.nextNode()) {
+      nodes.push(walk.currentNode)
+    }
+
+    return nodes
+  }
+
+  // Randomly selected characters are made visible; others are replaced by bullets (•)
+  const textNodes = extractTextNodes(accessSection)
+  const fullText = textNodes.map(node => node.textContent).join('')
+  const filteredText = fullText.replace(/\s/g, '') // Exclude whitespaces
+
+  const visibleCharactersCount = Math.floor(
+    (accessScore / 100) * filteredText.length
+  )
+  const visibleIndices = new Set()
+
+  while (visibleIndices.size < visibleCharactersCount) {
+    visibleIndices.add(Math.floor(Math.random() * filteredText.length))
+  }
+
+  let charIndex = 0
+  textNodes.forEach(node => {
+    let result = ''
+
+    for (let char of node.textContent) {
+      if (/\s/.test(char)) {
+        result += char // Preserve whitespace
+      } else {
+        result += visibleIndices.has(charIndex) ? char : '•'
+        charIndex++
+      }
+    }
+
+    node.textContent = result
+  })
+}
+
+applyAccessEffect()
