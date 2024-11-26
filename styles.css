@@ -28,3 +28,15 @@ body {
     pointer-events: none;
     z-index: 1;
 }
+
+.blur-overlay {
+    position: relative;
+    overflow: hidden;
+    transition: filter 0.3s ease; /* Smooth blur adjustment */
+  }
+  
+  .blur-overlay img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }

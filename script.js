@@ -1,5 +1,6 @@
 const internetFreedomScore = 0 // Adjust this from 0 to 100 (0 = fully obscured with a bar, 100 = fully visible)
 const accessScore = 10 // Adjust this from 0 to 100 (0 = all characters hidden with a dot, 100 = fully visible)
+const contentScore = 0 // Adjust this from 0 to 100 (0 = characters are blurred, 100 = fully visible)
 
 // === Internet Freedom Visualization for Intro Section ===
 const introSection = document.getElementById('intro-section')
@@ -136,3 +137,14 @@ function applyAccessEffect () {
 }
 
 applyAccessEffect()
+
+// === Limits on Content Effect ===
+const blurOverlay = document.querySelector('.blur-overlay')
+// Adjust the blur intensity based on the contentScore; the lower the contentScore, the higher the blur value, making the content harder to see
+function applyBlurEffect () {
+  const maxBlur = 8 // Higher value = stronger blur
+  const blurValue = ((100 - contentScore) / 100) * maxBlur
+  blurOverlay.style.filter = `blur(${blurValue}px)`
+}
+
+applyBlurEffect()
