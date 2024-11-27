@@ -1,7 +1,7 @@
 const internetFreedomScore = 0 // Adjust this from 0 to 100 (0 = fully obscured with a bar, 100 = fully visible)
 const accessScore = 10 // Adjust this from 0 to 100 (0 = all characters hidden with a dot, 100 = fully visible)
 const contentScore = 0 // Adjust this from 0 to 100 (0 = characters are blurred, 100 = fully visible)
-const rightsScore = 99 // Adjust this from 0 to 100 (0 = essentially every mouse movement captured, 100 = no mouse movement is captured)
+const rightsScore = 90 // Adjust this from 0 to 100 (0 = essentially every mouse movement captured, 100 = no mouse movement is captured)
 
 // === Internet Freedom Visualization for Intro Section ===
 const introSection = document.getElementById('intro-section')
@@ -185,6 +185,11 @@ function getCaptureInterval (score) {
   }
 }
 
+// Function to calculate opacity based on rights score (linear scaling)
+function getOpacity (score) {
+  return 1 - score / 100.0 // Opacity decreases as score increases
+}
+
 // Event listener for tracking mouse movements
 document.addEventListener('mousemove', event => {
   if (isMouseInsideRightsSection(event)) {
@@ -201,7 +206,8 @@ document.addEventListener('mousemove', event => {
       const rect = rightsSection.getBoundingClientRect()
       trails.push({
         x: event.clientX - rect.left, // Adjust position relative to section
-        y: event.clientY - rect.top // Adjust position relative to section
+        y: event.clientY - rect.top, // Adjust position relative to section
+        opacity: getOpacity(rightsScore) // Opacity based on the rights score
       })
       lastCaptureTime = currentTime
     }
@@ -226,7 +232,7 @@ function isMouseInsideRightsSection (event) {
 function renderTrails () {
   ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear the canvas before drawing new trails
   trails.forEach(trail => {
-    ctx.fillStyle = 'rgba(0, 0, 0, 1)' // Use solid color for trails
+    ctx.fillStyle = `rgba(0, 0, 0, ${trail.opacity})` // Use black color for trails, set opacity based on rights score
     ctx.beginPath()
     ctx.arc(trail.x, trail.y, 5, 0, Math.PI * 2) // Draw the trail as a circle
     ctx.fill()
