@@ -1,7 +1,7 @@
 const internetFreedomScore = 0 // Adjust this from 0 to 100 (0 = fully obscured with a bar, 100 = fully visible)
 const accessScore = 10 // Adjust this from 0 to 100 (0 = all characters hidden with a dot, 100 = fully visible)
 const contentScore = 0 // Adjust this from 0 to 100 (0 = characters are blurred, 100 = fully visible)
-const rightsScore = 10 // Adjust this from 0 to 100 (0 = more trails visible for longer, 100 = no trails visible)
+const rightsScore = 99 // Adjust this from 0 to 100 (0 = essentially every mouse movement captured, 100 = no mouse movement is captured)
 
 // === Internet Freedom Visualization for Intro Section ===
 const introSection = document.getElementById('intro-section')
@@ -168,19 +168,43 @@ function resizeCanvas () {
 resizeCanvas()
 
 const trails = []
-const maxTrails = Math.floor((100 - rightsScore) / 10) // Calculate max trails based on score
+
+// Calculate the interval at which to capture the mouse movement based on the rights score
+const captureInterval = Math.max(rightsScore * 50, 10) // Prevents the interval from being too low
+
+let lastCaptureTime = 0
+
+// Function to calculate capture interval based on rights score
+function getCaptureInterval (score) {
+  if (score >= 70) {
+    return Math.max(10, score * 15) // Ensures interval doesn't go below 10ms
+  } else if (score >= 40) {
+    return Math.max(10, score * 12) // Ensures interval doesn't go below 10ms
+  } else {
+    return Math.max(10, score * 10) // Ensures interval doesn't go below 10ms
+  }
+}
 
 // Event listener for tracking mouse movements
 document.addEventListener('mousemove', event => {
   if (isMouseInsideRightsSection(event)) {
-    const rect = rightsSection.getBoundingClientRect()
-    // Adjust mouse position relative to the rights section
-    trails.push({
-      x: event.clientX - rect.left, // Adjust position relative to section
-      y: event.clientY - rect.top, // Adjust position relative to section
-      alpha: 1.0
-    })
-    if (trails.length > maxTrails) trails.shift() // Limit the number of trails
+    if (rightsScore == 100) {
+      // Don't capture mouse movement if the score is 100
+      return
+    }
+
+    const captureInterval = getCaptureInterval(rightsScore) // Get the current capture interval based on rights score
+    const currentTime = Date.now() // Get the current time
+
+    // Capture mouse position at the specified interval
+    if (currentTime - lastCaptureTime >= captureInterval) {
+      const rect = rightsSection.getBoundingClientRect()
+      trails.push({
+        x: event.clientX - rect.left, // Adjust position relative to section
+        y: event.clientY - rect.top // Adjust position relative to section
+      })
+      lastCaptureTime = currentTime
+    }
   }
 })
 
@@ -201,13 +225,11 @@ function isMouseInsideRightsSection (event) {
 // Render the mouse trails on the canvas
 function renderTrails () {
   ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear the canvas before drawing new trails
-  trails.forEach((trail, index) => {
-    ctx.fillStyle = `rgba(0, 0, 0, ${trail.alpha})`
+  trails.forEach(trail => {
+    ctx.fillStyle = 'rgba(0, 0, 0, 1)' // Use solid color for trails
     ctx.beginPath()
     ctx.arc(trail.x, trail.y, 5, 0, Math.PI * 2) // Draw the trail as a circle
     ctx.fill()
-    trail.alpha -= 0.02 // Gradual fade-out of the trails
-    if (trail.alpha <= 0) trails.splice(index, 1) // Remove trails that have fully faded
   })
   requestAnimationFrame(renderTrails) // Request the next animation frame
 }
