@@ -33,10 +33,27 @@ body {
     position: relative;
     overflow: hidden;
     transition: filter 0.3s ease; /* Smooth blur adjustment */
-  }
+}
   
-  .blur-overlay img {
+.blur-overlay img {
     max-width: 100%;
     height: auto;
     display: block;
-  }
+}
+
+
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;  /* Make sure the canvas is on top of the section */
+    pointer-events: none; /* Ensure the canvas does not block interaction */
+}
+  
+#rights-section {
+    position: relative;
+    border: 1px solid black;
+    padding: 20px;
+    min-height: 200px; /* Minimum height for demo purposes */
+}

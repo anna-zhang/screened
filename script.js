@@ -1,6 +1,7 @@
 const internetFreedomScore = 0 // Adjust this from 0 to 100 (0 = fully obscured with a bar, 100 = fully visible)
 const accessScore = 10 // Adjust this from 0 to 100 (0 = all characters hidden with a dot, 100 = fully visible)
 const contentScore = 0 // Adjust this from 0 to 100 (0 = characters are blurred, 100 = fully visible)
+const rightsScore = 10 // Adjust this from 0 to 100 (0 = more trails visible for longer, 100 = no trails visible)
 
 // === Internet Freedom Visualization for Intro Section ===
 const introSection = document.getElementById('intro-section')
@@ -148,3 +149,70 @@ function applyBlurEffect () {
 }
 
 applyBlurEffect()
+
+// Effect C: Mouse trail based on rights score (only for the Violation of User Rights section)
+const rightsSection = document.getElementById('rights-section')
+const canvas = document.getElementById('mouse-trail')
+const ctx = canvas.getContext('2d')
+
+// Resize the canvas to match the rights section
+function resizeCanvas () {
+  const rect = rightsSection.getBoundingClientRect()
+
+  // Resize the canvas to match the section
+  canvas.width = rect.width
+  canvas.height = rect.height
+}
+
+// Initial resize
+resizeCanvas()
+
+const trails = []
+const maxTrails = Math.floor((100 - rightsScore) / 10) // Calculate max trails based on score
+
+// Event listener for tracking mouse movements
+document.addEventListener('mousemove', event => {
+  if (isMouseInsideRightsSection(event)) {
+    const rect = rightsSection.getBoundingClientRect()
+    // Adjust mouse position relative to the rights section
+    trails.push({
+      x: event.clientX - rect.left, // Adjust position relative to section
+      y: event.clientY - rect.top, // Adjust position relative to section
+      alpha: 1.0
+    })
+    if (trails.length > maxTrails) trails.shift() // Limit the number of trails
+  }
+})
+
+// Check if the mouse is inside the bounds of the rights section
+function isMouseInsideRightsSection (event) {
+  const rect = rightsSection.getBoundingClientRect()
+  const mouseX = event.clientX
+  const mouseY = event.clientY
+
+  return (
+    mouseX >= rect.left &&
+    mouseX <= rect.right &&
+    mouseY >= rect.top &&
+    mouseY <= rect.bottom
+  )
+}
+
+// Render the mouse trails on the canvas
+function renderTrails () {
+  ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear the canvas before drawing new trails
+  trails.forEach((trail, index) => {
+    ctx.fillStyle = `rgba(0, 0, 0, ${trail.alpha})`
+    ctx.beginPath()
+    ctx.arc(trail.x, trail.y, 5, 0, Math.PI * 2) // Draw the trail as a circle
+    ctx.fill()
+    trail.alpha -= 0.02 // Gradual fade-out of the trails
+    if (trail.alpha <= 0) trails.splice(index, 1) // Remove trails that have fully faded
+  })
+  requestAnimationFrame(renderTrails) // Request the next animation frame
+}
+
+renderTrails() // Start rendering the trails
+
+// Adjust canvas size and position on window resize
+window.addEventListener('resize', resizeCanvas)
