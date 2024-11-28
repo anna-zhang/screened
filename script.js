@@ -1,7 +1,11 @@
-var internetFreedomScore = 90 // Adjust this from 0 to 100 (0 = fully obscured with a bar, 100 = fully visible)
-var accessScore = 90 // Adjust this from 0 to 100 (0 = all characters hidden with a dot, 100 = fully visible)
-var contentScore = 90 // Adjust this from 0 to 100 (0 = characters are blurred, 100 = fully visible)
-var rightsScore = 90 // Adjust this from 0 to 100 (0 = essentially every mouse movement captured, 100 = no mouse movement is captured)
+var internetFreedomScore = 90 // Adjust this from 0 to maxInternetFreedomScore (0 = fully obscured with a bar, maxInternetFreedomScore = fully visible)
+const maxInternetFreedomScore = 100 // Maximum Internet Freedom score
+var accessScore = 90 // Adjust this from 0 to maxAccessScore (0 = all characters hidden with a dot, maxAccessScore = fully visible)
+const maxAccessScore = 25 // Maximum Obstacles to Access score
+var contentScore = 90 // Adjust this from 0 to maxContentScore (0 = characters are blurred, maxContentScore = fully visible)
+const maxContentScore = 35 // Maximum Limits on Content score
+var rightsScore = 90 // Adjust this from 0 to maxRightsScore (0 = essentially every mouse movement captured, maxRightsScore = no mouse movement is captured)
+const maxRightsScore = 40 // Maximum Violation of User Rights score
 
 // === Internet Freedom Visualization for Intro Section ===
 const introSection = document.getElementById('intro-section')
@@ -59,7 +63,8 @@ function createBars () {
       const barHeight =
         internetFreedomScore === 0
           ? characterHeight
-          : characterHeight * (1 - internetFreedomScore / 100)
+          : characterHeight *
+            (1 - internetFreedomScore / maxInternetFreedomScore)
 
       // Position the bar over the text node's bounding box
       lineBar.style.width = `${rect.width}px`
@@ -128,7 +133,7 @@ function applyAccessEffect () {
 
     // Calculate the number of visible characters based on the access score
     const visibleCharactersCount = Math.floor(
-      (accessScore / 100) * filteredText.length
+      (accessScore / maxAccessScore) * filteredText.length
     )
     console.log(
       `Visible Characters: ${visibleCharactersCount}/${filteredText.length}`
@@ -168,7 +173,8 @@ const blurOverlay = document.querySelector('.blur-overlay')
 function applyBlurEffect () {
   console.log('Updating blur effect...')
   const maxBlur = 8 // Higher value = stronger blur
-  const blurValue = ((100 - contentScore) / 100) * maxBlur
+  const blurValue =
+    ((maxContentScore - contentScore) / maxContentScore) * maxBlur
   blurOverlay.style.filter = `blur(${blurValue}px)`
 }
 
@@ -193,7 +199,7 @@ resizeCanvas()
 
 var trails = []
 
-// Function to clear the canvas and prepare for the new frame
+// Function to clear the canvas completely on country switch
 function clearCanvas () {
   trails = [] // Reset stored trails
   ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear the whole canvas
@@ -217,14 +223,14 @@ function getCaptureInterval (score) {
 
 // Function to calculate opacity based on rights score (linear scaling)
 function getOpacity (score) {
-  return 1 - score / 100.0 // Opacity decreases as score increases
+  return 1 - score / maxRightsScore // Opacity decreases as score increases
 }
 
 // Event listener for tracking mouse movements
 document.addEventListener('mousemove', event => {
   if (isMouseInsideRightsSection(event)) {
-    if (rightsScore == 100) {
-      // Don't capture mouse movement if the score is 100
+    if (rightsScore == maxRightsScore) {
+      // Don't capture mouse movement if the score is maxInternetFreedomScore
       return
     }
 
@@ -260,22 +266,18 @@ function isMouseInsideRightsSection (event) {
 
 // Render the mouse trails on the canvas
 function renderTrails () {
+  ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear the canvas before drawing all trails
   trails.forEach(trail => {
     ctx.fillStyle = `rgba(0, 0, 0, ${trail.opacity})` // Use black color for trails, set opacity based on rights score
     ctx.beginPath()
     ctx.arc(trail.x, trail.y, 5, 0, Math.PI * 2) // Draw the trail as a circle
     ctx.fill()
   })
+  requestAnimationFrame(renderTrails) // Request the next animation frame
 }
 
-// Animation loop with requestAnimationFrame
-function animate () {
-  renderTrails() // Capture trails
-  requestAnimationFrame(animate) // Call the next animation frame
-}
-
-// Start the animation loop
-animate()
+// Start rendering trails
+renderTrails()
 
 // Adjust canvas size and position on window resize
 window.addEventListener('resize', resizeCanvas)
