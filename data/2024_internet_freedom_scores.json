@@ -1,0 +1,578 @@
+[
+  {
+    "country": "Angola",
+    "status": "PF",
+    "accessScore": 12,
+    "contentScore": 28,
+    "rightsScore": 19,
+    "internetFreedomScore": 59
+  },
+  {
+    "country": "Argentina",
+    "status": "F",
+    "accessScore": 19,
+    "contentScore": 27,
+    "rightsScore": 25,
+    "internetFreedomScore": 71
+  },
+  {
+    "country": "Armenia",
+    "status": "F",
+    "accessScore": 20,
+    "contentScore": 29,
+    "rightsScore": 25,
+    "internetFreedomScore": 74
+  },
+  {
+    "country": "Australia",
+    "status": "F",
+    "accessScore": 23,
+    "contentScore": 28,
+    "rightsScore": 25,
+    "internetFreedomScore": 76
+  },
+  {
+    "country": "Azerbaijan",
+    "status": "NF",
+    "accessScore": 11,
+    "contentScore": 13,
+    "rightsScore": 10,
+    "internetFreedomScore": 34
+  },
+  {
+    "country": "Bahrain",
+    "status": "NF",
+    "accessScore": 15,
+    "contentScore": 6,
+    "rightsScore": 7,
+    "internetFreedomScore": 28
+  },
+  {
+    "country": "Bangladesh",
+    "status": "PF",
+    "accessScore": 12,
+    "contentScore": 17,
+    "rightsScore": 11,
+    "internetFreedomScore": 40
+  },
+  {
+    "country": "Belarus",
+    "status": "NF",
+    "accessScore": 13,
+    "contentScore": 5,
+    "rightsScore": 4,
+    "internetFreedomScore": 22
+  },
+  {
+    "country": "Brazil",
+    "status": "PF",
+    "accessScore": 20,
+    "contentScore": 25,
+    "rightsScore": 20,
+    "internetFreedomScore": 65
+  },
+  {
+    "country": "Cambodia",
+    "status": "PF",
+    "accessScore": 13,
+    "contentScore": 16,
+    "rightsScore": 14,
+    "internetFreedomScore": 43
+  },
+  {
+    "country": "Canada",
+    "status": "F",
+    "accessScore": 23,
+    "contentScore": 32,
+    "rightsScore": 31,
+    "internetFreedomScore": 86
+  },
+  {
+    "country": "Chile",
+    "status": "F",
+    "accessScore": 24,
+    "contentScore": 32,
+    "rightsScore": 30,
+    "internetFreedomScore": 86
+  },
+  {
+    "country": "China",
+    "status": "NF",
+    "accessScore": 7,
+    "contentScore": 2,
+    "rightsScore": 0,
+    "internetFreedomScore": 9
+  },
+  {
+    "country": "Colombia",
+    "status": "PF",
+    "accessScore": 19,
+    "contentScore": 25,
+    "rightsScore": 21,
+    "internetFreedomScore": 65
+  },
+  {
+    "country": "Costa Rica",
+    "status": "F",
+    "accessScore": 21,
+    "contentScore": 32,
+    "rightsScore": 32,
+    "internetFreedomScore": 85
+  },
+  {
+    "country": "Cuba",
+    "status": "NF",
+    "accessScore": 5,
+    "contentScore": 9,
+    "rightsScore": 6,
+    "internetFreedomScore": 20
+  },
+  {
+    "country": "Ecuador",
+    "status": "PF",
+    "accessScore": 18,
+    "contentScore": 23,
+    "rightsScore": 22,
+    "internetFreedomScore": 63
+  },
+  {
+    "country": "Egypt",
+    "status": "NF",
+    "accessScore": 14,
+    "contentScore": 9,
+    "rightsScore": 5,
+    "internetFreedomScore": 28
+  },
+  {
+    "country": "Estonia",
+    "status": "F",
+    "accessScore": 25,
+    "contentScore": 31,
+    "rightsScore": 36,
+    "internetFreedomScore": 92
+  },
+  {
+    "country": "Ethiopia",
+    "status": "NF",
+    "accessScore": 5,
+    "contentScore": 12,
+    "rightsScore": 10,
+    "internetFreedomScore": 27
+  },
+  {
+    "country": "France",
+    "status": "F",
+    "accessScore": 22,
+    "contentScore": 29,
+    "rightsScore": 25,
+    "internetFreedomScore": 76
+  },
+  {
+    "country": "Georgia",
+    "status": "F",
+    "accessScore": 19,
+    "contentScore": 28,
+    "rightsScore": 27,
+    "internetFreedomScore": 74
+  },
+  {
+    "country": "Germany",
+    "status": "F",
+    "accessScore": 23,
+    "contentScore": 28,
+    "rightsScore": 26,
+    "internetFreedomScore": 77
+  },
+  {
+    "country": "Ghana",
+    "status": "PF",
+    "accessScore": 14,
+    "contentScore": 28,
+    "rightsScore": 23,
+    "internetFreedomScore": 65
+  },
+  {
+    "country": "Hungary",
+    "status": "PF",
+    "accessScore": 21,
+    "contentScore": 24,
+    "rightsScore": 24,
+    "internetFreedomScore": 69
+  },
+  {
+    "country": "Iceland",
+    "status": "F",
+    "accessScore": 25,
+    "contentScore": 34,
+    "rightsScore": 35,
+    "internetFreedomScore": 94
+  },
+  {
+    "country": "India",
+    "status": "PF",
+    "accessScore": 14,
+    "contentScore": 19,
+    "rightsScore": 17,
+    "internetFreedomScore": 50
+  },
+  {
+    "country": "Indonesia",
+    "status": "PF",
+    "accessScore": 15,
+    "contentScore": 18,
+    "rightsScore": 16,
+    "internetFreedomScore": 49
+  },
+  {
+    "country": "Iran",
+    "status": "NF",
+    "accessScore": 7,
+    "contentScore": 4,
+    "rightsScore": 1,
+    "internetFreedomScore": 12
+  },
+  {
+    "country": "Iraq",
+    "status": "PF",
+    "accessScore": 10,
+    "contentScore": 16,
+    "rightsScore": 14,
+    "internetFreedomScore": 40
+  },
+  {
+    "country": "Italy",
+    "status": "F",
+    "accessScore": 21,
+    "contentScore": 29,
+    "rightsScore": 25,
+    "internetFreedomScore": 75
+  },
+  {
+    "country": "Japan",
+    "status": "F",
+    "accessScore": 22,
+    "contentScore": 30,
+    "rightsScore": 26,
+    "internetFreedomScore": 78
+  },
+  {
+    "country": "Jordan",
+    "status": "PF",
+    "accessScore": 14,
+    "contentScore": 16,
+    "rightsScore": 17,
+    "internetFreedomScore": 47
+  },
+  {
+    "country": "Kazakhstan",
+    "status": "NF",
+    "accessScore": 12,
+    "contentScore": 12,
+    "rightsScore": 10,
+    "internetFreedomScore": 34
+  },
+  {
+    "country": "Kenya",
+    "status": "PF",
+    "accessScore": 16,
+    "contentScore": 25,
+    "rightsScore": 23,
+    "internetFreedomScore": 64
+  },
+  {
+    "country": "Kyrgyzstan",
+    "status": "PF",
+    "accessScore": 15,
+    "contentScore": 18,
+    "rightsScore": 15,
+    "internetFreedomScore": 48
+  },
+  {
+    "country": "Lebanon",
+    "status": "PF",
+    "accessScore": 9,
+    "contentScore": 22,
+    "rightsScore": 19,
+    "internetFreedomScore": 50
+  },
+  {
+    "country": "Libya",
+    "status": "PF",
+    "accessScore": 8,
+    "contentScore": 21,
+    "rightsScore": 14,
+    "internetFreedomScore": 43
+  },
+  {
+    "country": "Malawi",
+    "status": "PF",
+    "accessScore": 11,
+    "contentScore": 26,
+    "rightsScore": 22,
+    "internetFreedomScore": 59
+  },
+  {
+    "country": "Malaysia",
+    "status": "PF",
+    "accessScore": 19,
+    "contentScore": 21,
+    "rightsScore": 20,
+    "internetFreedomScore": 60
+  },
+  {
+    "country": "Mexico",
+    "status": "PF",
+    "accessScore": 18,
+    "contentScore": 25,
+    "rightsScore": 18,
+    "internetFreedomScore": 61
+  },
+  {
+    "country": "Morocco",
+    "status": "PF",
+    "accessScore": 17,
+    "contentScore": 21,
+    "rightsScore": 16,
+    "internetFreedomScore": 54
+  },
+  {
+    "country": "Myanmar",
+    "status": "NF",
+    "accessScore": 2,
+    "contentScore": 5,
+    "rightsScore": 2,
+    "internetFreedomScore": 9
+  },
+  {
+    "country": "Nicaragua",
+    "status": "PF",
+    "accessScore": 11,
+    "contentScore": 16,
+    "rightsScore": 14,
+    "internetFreedomScore": 41
+  },
+  {
+    "country": "Nigeria",
+    "status": "PF",
+    "accessScore": 17,
+    "contentScore": 24,
+    "rightsScore": 18,
+    "internetFreedomScore": 59
+  },
+  {
+    "country": "Pakistan",
+    "status": "NF",
+    "accessScore": 6,
+    "contentScore": 13,
+    "rightsScore": 8,
+    "internetFreedomScore": 27
+  },
+  {
+    "country": "Philippines",
+    "status": "PF",
+    "accessScore": 16,
+    "contentScore": 23,
+    "rightsScore": 21,
+    "internetFreedomScore": 60
+  },
+  {
+    "country": "Russia",
+    "status": "NF",
+    "accessScore": 10,
+    "contentScore": 5,
+    "rightsScore": 5,
+    "internetFreedomScore": 20
+  },
+  {
+    "country": "Rwanda",
+    "status": "NF",
+    "accessScore": 13,
+    "contentScore": 11,
+    "rightsScore": 12,
+    "internetFreedomScore": 36
+  },
+  {
+    "country": "Saudi Arabia",
+    "status": "NF",
+    "accessScore": 13,
+    "contentScore": 7,
+    "rightsScore": 5,
+    "internetFreedomScore": 25
+  },
+  {
+    "country": "Serbia",
+    "status": "F",
+    "accessScore": 21,
+    "contentScore": 25,
+    "rightsScore": 24,
+    "internetFreedomScore": 70
+  },
+  {
+    "country": "Singapore",
+    "status": "PF",
+    "accessScore": 19,
+    "contentScore": 17,
+    "rightsScore": 17,
+    "internetFreedomScore": 53
+  },
+  {
+    "country": "South Africa",
+    "status": "F",
+    "accessScore": 19,
+    "contentScore": 29,
+    "rightsScore": 26,
+    "internetFreedomScore": 74
+  },
+  {
+    "country": "South Korea",
+    "status": "PF",
+    "accessScore": 22,
+    "contentScore": 23,
+    "rightsScore": 21,
+    "internetFreedomScore": 66
+  },
+  {
+    "country": "Sri Lanka",
+    "status": "PF",
+    "accessScore": 14,
+    "contentScore": 21,
+    "rightsScore": 18,
+    "internetFreedomScore": 53
+  },
+  {
+    "country": "Sudan",
+    "status": "NF",
+    "accessScore": 5,
+    "contentScore": 14,
+    "rightsScore": 9,
+    "internetFreedomScore": 28
+  },
+  {
+    "country": "Taiwan",
+    "status": "F",
+    "accessScore": 24,
+    "contentScore": 29,
+    "rightsScore": 26,
+    "internetFreedomScore": 79
+  },
+  {
+    "country": "Thailand",
+    "status": "NF",
+    "accessScore": 16,
+    "contentScore": 14,
+    "rightsScore": 9,
+    "internetFreedomScore": 39
+  },
+  {
+    "country": "The Gambia",
+    "status": "PF",
+    "accessScore": 13,
+    "contentScore": 25,
+    "rightsScore": 18,
+    "internetFreedomScore": 56
+  },
+  {
+    "country": "The Netherlands",
+    "status": "F",
+    "accessScore": 24,
+    "contentScore": 29,
+    "rightsScore": 30,
+    "internetFreedomScore": 83
+  },
+  {
+    "country": "Tunisia",
+    "status": "PF",
+    "accessScore": 16,
+    "contentScore": 26,
+    "rightsScore": 18,
+    "internetFreedomScore": 60
+  },
+  {
+    "country": "Turkey",
+    "status": "NF",
+    "accessScore": 14,
+    "contentScore": 10,
+    "rightsScore": 7,
+    "internetFreedomScore": 31
+  },
+  {
+    "country": "Uganda",
+    "status": "PF",
+    "accessScore": 14,
+    "contentScore": 21,
+    "rightsScore": 18,
+    "internetFreedomScore": 53
+  },
+  {
+    "country": "Ukraine",
+    "status": "PF",
+    "accessScore": 18,
+    "contentScore": 22,
+    "rightsScore": 19,
+    "internetFreedomScore": 59
+  },
+  {
+    "country": "United Arab Emirates",
+    "status": "NF",
+    "accessScore": 14,
+    "contentScore": 9,
+    "rightsScore": 7,
+    "internetFreedomScore": 30
+  },
+  {
+    "country": "United Kingdom",
+    "status": "F",
+    "accessScore": 24,
+    "contentScore": 29,
+    "rightsScore": 25,
+    "internetFreedomScore": 78
+  },
+  {
+    "country": "United States",
+    "status": "F",
+    "accessScore": 21,
+    "contentScore": 29,
+    "rightsScore": 26,
+    "internetFreedomScore": 76
+  },
+  {
+    "country": "Uzbekistan",
+    "status": "NF",
+    "accessScore": 10,
+    "contentScore": 11,
+    "rightsScore": 6,
+    "internetFreedomScore": 27
+  },
+  {
+    "country": "Venezuela",
+    "status": "NF",
+    "accessScore": 8,
+    "contentScore": 11,
+    "rightsScore": 11,
+    "internetFreedomScore": 30
+  },
+  {
+    "country": "Vietnam",
+    "status": "NF",
+    "accessScore": 12,
+    "contentScore": 6,
+    "rightsScore": 4,
+    "internetFreedomScore": 22
+  },
+  {
+    "country": "Zambia",
+    "status": "PF",
+    "accessScore": 15,
+    "contentScore": 27,
+    "rightsScore": 20,
+    "internetFreedomScore": 62
+  },
+  {
+    "country": "Zimbabwe",
+    "status": "PF",
+    "accessScore": 9,
+    "contentScore": 21,
+    "rightsScore": 18,
+    "internetFreedomScore": 48
+  }
+]
