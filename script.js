@@ -1,7 +1,7 @@
-const internetFreedomScore = 0 // Adjust this from 0 to 100 (0 = fully obscured with a bar, 100 = fully visible)
-const accessScore = 10 // Adjust this from 0 to 100 (0 = all characters hidden with a dot, 100 = fully visible)
-const contentScore = 0 // Adjust this from 0 to 100 (0 = characters are blurred, 100 = fully visible)
-const rightsScore = 90 // Adjust this from 0 to 100 (0 = essentially every mouse movement captured, 100 = no mouse movement is captured)
+var internetFreedomScore = 90 // Adjust this from 0 to 100 (0 = fully obscured with a bar, 100 = fully visible)
+var accessScore = 90 // Adjust this from 0 to 100 (0 = all characters hidden with a dot, 100 = fully visible)
+var contentScore = 90 // Adjust this from 0 to 100 (0 = characters are blurred, 100 = fully visible)
+var rightsScore = 90 // Adjust this from 0 to 100 (0 = essentially every mouse movement captured, 100 = no mouse movement is captured)
 
 // === Internet Freedom Visualization for Intro Section ===
 const introSection = document.getElementById('intro-section')
@@ -88,51 +88,74 @@ window.addEventListener('resize', () => {
 
 // === Obstacles to Access Effect ===
 const accessSection = document.getElementById('access-section')
+// Store the original text nodes content
+let originalTextNodes = []
+
+// Function to store the original text content from all text nodes inside the access-section
+function storeOriginalTextNodes () {
+  // Clear the array to re-store content if it's being reset
+  originalTextNodes = []
+
+  // Walk through the entire access-section and collect all text nodes
+  const textNodes = []
+  const walker = document.createTreeWalker(
+    accessSection,
+    NodeFilter.SHOW_TEXT,
+    null,
+    false
+  )
+
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode)
+  }
+
+  // Store original text nodes and their parent elements
+  textNodes.forEach(node => {
+    originalTextNodes.push({
+      node: node,
+      originalText: node.textContent.trim()
+    })
+  })
+}
+
+// Function to apply the access effect based on access score
 function applyAccessEffect () {
-  // Operate directly on all visible text nodes to leave the HTML tag structure (h2, p, etc.) intact
-  function extractTextNodes (element) {
-    const nodes = []
-    const walk = document.createTreeWalker(
-      element,
-      NodeFilter.SHOW_TEXT,
-      null,
-      false
+  console.log('Updating access effect...')
+
+  // Loop through each stored text node and calculate the number of visible characters
+  originalTextNodes.forEach(({ node, originalText }) => {
+    const filteredText = originalText.replace(/\s/g, '') // Remove whitespaces for calculation
+
+    // Calculate the number of visible characters based on the access score
+    const visibleCharactersCount = Math.floor(
+      (accessScore / 100) * filteredText.length
+    )
+    console.log(
+      `Visible Characters: ${visibleCharactersCount}/${filteredText.length}`
     )
 
-    while (walk.nextNode()) {
-      nodes.push(walk.currentNode)
+    // Generate random indices for visible characters
+    const visibleIndicesSet = new Set()
+    while (visibleIndicesSet.size < visibleCharactersCount) {
+      visibleIndicesSet.add(Math.floor(Math.random() * filteredText.length))
     }
 
-    return nodes
-  }
-
-  // Randomly selected characters are made visible; others are replaced by bullets (•)
-  const textNodes = extractTextNodes(accessSection)
-  const fullText = textNodes.map(node => node.textContent).join('')
-  const filteredText = fullText.replace(/\s/g, '') // Exclude whitespaces
-
-  const visibleCharactersCount = Math.floor(
-    (accessScore / 100) * filteredText.length
-  )
-  const visibleIndices = new Set()
-
-  while (visibleIndices.size < visibleCharactersCount) {
-    visibleIndices.add(Math.floor(Math.random() * filteredText.length))
-  }
-
-  let charIndex = 0
-  textNodes.forEach(node => {
+    // Rebuild the text node with bullets for non-visible characters
+    let charIndex = 0
     let result = ''
 
-    for (let char of node.textContent) {
-      if (/\s/.test(char)) {
-        result += char // Preserve whitespace
+    for (let i = 0; i < originalText.length; i++) {
+      if (/\s/.test(originalText[i])) {
+        // Preserve whitespace
+        result += originalText[i]
       } else {
-        result += visibleIndices.has(charIndex) ? char : '•'
+        // Replace character with bullet (•) if not in the visible set
+        result += visibleIndicesSet.has(charIndex) ? originalText[i] : '•'
         charIndex++
       }
     }
 
+    // Update the node's text content with the modified result
     node.textContent = result
   })
 }
@@ -143,6 +166,7 @@ applyAccessEffect()
 const blurOverlay = document.querySelector('.blur-overlay')
 // Adjust the blur intensity based on the contentScore; the lower the contentScore, the higher the blur value, making the content harder to see
 function applyBlurEffect () {
+  console.log('Updating blur effect...')
   const maxBlur = 8 // Higher value = stronger blur
   const blurValue = ((100 - contentScore) / 100) * maxBlur
   blurOverlay.style.filter = `blur(${blurValue}px)`
@@ -167,7 +191,13 @@ function resizeCanvas () {
 // Initial resize
 resizeCanvas()
 
-const trails = []
+var trails = []
+
+// Function to clear the canvas and prepare for the new frame
+function clearCanvas () {
+  trails = [] // Reset stored trails
+  ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear the whole canvas
+}
 
 // Calculate the interval at which to capture the mouse movement based on the rights score
 const captureInterval = Math.max(rightsScore * 50, 10) // Prevents the interval from being too low
@@ -230,17 +260,92 @@ function isMouseInsideRightsSection (event) {
 
 // Render the mouse trails on the canvas
 function renderTrails () {
-  ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear the canvas before drawing new trails
   trails.forEach(trail => {
     ctx.fillStyle = `rgba(0, 0, 0, ${trail.opacity})` // Use black color for trails, set opacity based on rights score
     ctx.beginPath()
     ctx.arc(trail.x, trail.y, 5, 0, Math.PI * 2) // Draw the trail as a circle
     ctx.fill()
   })
-  requestAnimationFrame(renderTrails) // Request the next animation frame
 }
 
-renderTrails() // Start rendering the trails
+// Animation loop with requestAnimationFrame
+function animate () {
+  renderTrails() // Capture trails
+  requestAnimationFrame(animate) // Call the next animation frame
+}
+
+// Start the animation loop
+animate()
 
 // Adjust canvas size and position on window resize
 window.addEventListener('resize', resizeCanvas)
+
+document.addEventListener('DOMContentLoaded', () => {
+  const countrySelect = document.getElementById('country-select')
+  const accessScoreDisplay = document.getElementById('access-score')
+  const contentScoreDisplay = document.getElementById('content-score')
+  const rightsScoreDisplay = document.getElementById('rights-score')
+  const internetFreedomScoreDisplay = document.getElementById(
+    'internet-freedom-score'
+  )
+
+  // Store the original text content for the access effect
+  storeOriginalTextNodes()
+
+  // Store all the country data from the JSON
+  let countryData = {}
+
+  // Load the JSON data
+  fetch('data/2024_internet_freedom_scores.json') // 2024 Internet Freedom Scores JSON file path
+    .then(response => response.json())
+    .then(data => {
+      // Populate country data
+      data.forEach(row => {
+        countryData[row.country] = row
+      })
+
+      // Populate the dropdown
+      populateCountryDropdown(data)
+    })
+
+  // Populate the dropdown with countries
+  function populateCountryDropdown (data) {
+    data.forEach(row => {
+      const option = document.createElement('option')
+      option.value = row.country
+      option.textContent = row.country
+      countrySelect.appendChild(option)
+    })
+  }
+
+  // Handle country selection
+  countrySelect.addEventListener('change', event => {
+    const selectedCountry = event.target.value
+    const countryScores = countryData[selectedCountry]
+
+    // Update the page based on country selection
+    if (countryScores) {
+      accessScoreDisplay.textContent = countryScores.accessScore
+      accessScore = countryScores.accessScore
+      contentScoreDisplay.textContent = countryScores.contentScore
+      contentScore = countryScores.contentScore
+      rightsScoreDisplay.textContent = countryScores.rightsScore
+      rightsScore = countryScores.rightsScore
+      internetFreedomScoreDisplay.textContent =
+        countryScores.internetFreedomScore
+      internetFreedomScore = countryScores.internetFreedomScore
+
+      // Update visualizations based on selected country's scores
+      updateVisualizations(countryScores)
+    }
+  })
+
+  // Function to update visualizations
+  function updateVisualizations (scores) {
+    console.log('Updating visualizations with new scores:', scores)
+    createBars()
+    applyAccessEffect()
+    applyBlurEffect()
+    clearCanvas() // Clear canvas when a new country is selected
+  }
+})
