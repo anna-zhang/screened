@@ -1,11 +1,14 @@
-var internetFreedomScore = 90 // Adjust this from 0 to maxInternetFreedomScore (0 = fully obscured with a bar, maxInternetFreedomScore = fully visible)
 const maxInternetFreedomScore = 100 // Maximum Internet Freedom score
-var accessScore = 90 // Adjust this from 0 to maxAccessScore (0 = all characters hidden with a dot, maxAccessScore = fully visible)
+var internetFreedomScore = maxInternetFreedomScore // Adjust this from 0 to maxInternetFreedomScore (0 = fully obscured with a bar, maxInternetFreedomScore = fully visible); default to best score (no visualization)
+
 const maxAccessScore = 25 // Maximum Obstacles to Access score
-var contentScore = 90 // Adjust this from 0 to maxContentScore (0 = characters are blurred, maxContentScore = fully visible)
+var accessScore = maxAccessScore // Adjust this from 0 to maxAccessScore (0 = all characters hidden with a dot, maxAccessScore = fully visible); default to best score (no visualization)
+
 const maxContentScore = 35 // Maximum Limits on Content score
-var rightsScore = 90 // Adjust this from 0 to maxRightsScore (0 = essentially every mouse movement captured, maxRightsScore = no mouse movement is captured)
+var contentScore = maxContentScore // Adjust this from 0 to maxContentScore (0 = characters are blurred, maxContentScore = fully visible); default to best score (no visualization)
+
 const maxRightsScore = 40 // Maximum Violation of User Rights score
+var rightsScore = maxRightsScore // Adjust this from 0 to maxRightsScore (0 = essentially every mouse movement captured, maxRightsScore = no mouse movement is captured); default to best score (no visualization)
 
 // === Internet Freedom Visualization for Intro Section ===
 const introSection = document.getElementById('intro-section')
@@ -327,14 +330,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update the page based on country selection
     if (countryScores) {
-      accessScoreDisplay.textContent = countryScores.accessScore
+      accessScoreDisplay.textContent = `${countryScores.accessScore} / ${maxAccessScore}`
       accessScore = countryScores.accessScore
-      contentScoreDisplay.textContent = countryScores.contentScore
+      contentScoreDisplay.textContent = `${countryScores.contentScore} / ${maxContentScore}`
       contentScore = countryScores.contentScore
-      rightsScoreDisplay.textContent = countryScores.rightsScore
+      rightsScoreDisplay.textContent = `${countryScores.rightsScore} / ${maxRightsScore}`
       rightsScore = countryScores.rightsScore
-      internetFreedomScoreDisplay.textContent =
-        countryScores.internetFreedomScore
+      internetFreedomScoreDisplay.textContent = `${countryScores.internetFreedomScore} / ${maxInternetFreedomScore}`
       internetFreedomScore = countryScores.internetFreedomScore
 
       // Update visualizations based on selected country's scores
