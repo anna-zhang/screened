@@ -13,6 +13,10 @@ body {
     background: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+.title {
+    text-align: center;
+}
   
 .introduction {
     position: relative;
@@ -53,7 +57,5 @@ canvas {
   
 #rights-section {
     position: relative;
-    border: 1px solid black;
     padding: 20px;
-    min-height: 200px; /* Minimum height for demo purposes */
 }
