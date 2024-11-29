@@ -104,6 +104,7 @@ window.addEventListener('resize', () => {
 const accessSection = document.getElementById('access-section')
 // Store the original text nodes content
 let originalTextNodes = []
+const visibilityState = {} // Store visibility indices for each country
 
 // Function to store the original text content from all text nodes inside the access-section
 function storeOriginalTextNodes () {
@@ -136,24 +137,43 @@ function storeOriginalTextNodes () {
 function applyAccessEffect () {
   console.log('Updating access effect...')
 
-  // Loop through each stored text node and calculate the number of visible characters
+  if (!lastSelectedCountry) {
+    return
+  }
+
+  console.log('lastSelectedCountry: ', lastSelectedCountry)
+  var visibleIndicesSet = visibilityState[lastSelectedCountry]
+
+  console.log('visibleIndicesSet: ', visibleIndicesSet)
+
+  if (!visibleIndicesSet) {
+    visibilityState[lastSelectedCountry] = new Map() // Initialize as a Map
+    // Loop through each stored text node and calculate the number of visible characters
+    originalTextNodes.forEach(({ node, originalText }) => {
+      const filteredText = originalText.replace(/\s/g, '') // Remove whitespaces for calculation
+
+      // Calculate the number of visible characters based on the access score
+      const visibleCharactersCount = Math.floor(
+        (accessScore / maxAccessScore) * filteredText.length
+      )
+      console.log(
+        `Visible Characters: ${visibleCharactersCount}/${filteredText.length}`
+      )
+
+      // Generate random indices for visible characters
+      visibleIndicesSet = new Set()
+      while (visibleIndicesSet.size < visibleCharactersCount) {
+        visibleIndicesSet.add(Math.floor(Math.random() * filteredText.length))
+      }
+
+      console.log('visibleIndicesSet after generating: ', visibleIndicesSet)
+
+      // Store visibility data for the country
+      visibilityState[lastSelectedCountry].set(node, visibleIndicesSet)
+    })
+  }
+
   originalTextNodes.forEach(({ node, originalText }) => {
-    const filteredText = originalText.replace(/\s/g, '') // Remove whitespaces for calculation
-
-    // Calculate the number of visible characters based on the access score
-    const visibleCharactersCount = Math.floor(
-      (accessScore / maxAccessScore) * filteredText.length
-    )
-    console.log(
-      `Visible Characters: ${visibleCharactersCount}/${filteredText.length}`
-    )
-
-    // Generate random indices for visible characters
-    const visibleIndicesSet = new Set()
-    while (visibleIndicesSet.size < visibleCharactersCount) {
-      visibleIndicesSet.add(Math.floor(Math.random() * filteredText.length))
-    }
-
     // Rebuild the text node with bullets for non-visible characters
     let charIndex = 0
     let result = ''
@@ -164,13 +184,43 @@ function applyAccessEffect () {
         result += originalText[i]
       } else {
         // Replace character with bullet (•) if not in the visible set
-        result += visibleIndicesSet.has(charIndex) ? originalText[i] : '•'
+        result += visibilityState[lastSelectedCountry].get(node).has(charIndex)
+          ? originalText[i]
+          : '•'
         charIndex++
       }
     }
 
     // Update the node's text content with the modified result
     node.textContent = result
+  })
+}
+
+// Function to clear the effect and return the text to its original state when the visualization is turned off
+function clearAccessEffect () {
+  const textNodes = []
+
+  const walk = document.createTreeWalker(
+    accessSection,
+    NodeFilter.SHOW_TEXT,
+    null,
+    false
+  )
+
+  while (walk.nextNode()) {
+    const node = walk.currentNode
+
+    if (!node.originalContent) {
+      node.originalContent = node.textContent
+    }
+
+    textNodes.push(node)
+  }
+
+  textNodes.forEach(node => {
+    // Restore the original text for each text node
+    const originalText = node.originalContent || node.textContent
+    node.textContent = originalText
   })
 }
 
@@ -369,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Remove the selected country's effect by re-creating the effect using the max scores, effectively turning off the visualization
     createBars()
-    applyAccessEffect()
+    clearAccessEffect()
     applyBlurEffect()
 
     // No country selected
