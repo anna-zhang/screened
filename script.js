@@ -10,6 +10,12 @@ var contentScore = maxContentScore // Adjust this from 0 to maxContentScore (0 =
 const maxRightsScore = 40 // Maximum Violation of User Rights score
 var rightsScore = maxRightsScore // Adjust this from 0 to maxRightsScore (0 = essentially every mouse movement captured, maxRightsScore = no mouse movement is captured); default to best score (no visualization)
 
+let isVisualizationOn = false
+let lastSelectedCountry = null
+const toggleVisualization = document.getElementById('toggle-visualization')
+const toggleLabel = document.getElementById('toggle-label')
+const controls = document.getElementById('controls')
+
 // === Internet Freedom Visualization for Intro Section ===
 const introSection = document.getElementById('intro-section')
 
@@ -285,6 +291,9 @@ renderTrails()
 // Adjust canvas size and position on window resize
 window.addEventListener('resize', resizeCanvas)
 
+// === Handle visualization controls ===
+const scoresSection = document.getElementById('visualization-container')
+
 document.addEventListener('DOMContentLoaded', () => {
   const countrySelect = document.getElementById('country-select')
   const accessScoreDisplay = document.getElementById('access-score')
@@ -325,31 +334,77 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle country selection
   countrySelect.addEventListener('change', event => {
-    const selectedCountry = event.target.value
-    const countryScores = countryData[selectedCountry]
-
-    // Update the page based on country selection
-    if (countryScores) {
-      accessScoreDisplay.textContent = `${countryScores.accessScore} / ${maxAccessScore}`
-      accessScore = countryScores.accessScore
-      contentScoreDisplay.textContent = `${countryScores.contentScore} / ${maxContentScore}`
-      contentScore = countryScores.contentScore
-      rightsScoreDisplay.textContent = `${countryScores.rightsScore} / ${maxRightsScore}`
-      rightsScore = countryScores.rightsScore
-      internetFreedomScoreDisplay.textContent = `${countryScores.internetFreedomScore} / ${maxInternetFreedomScore}`
-      internetFreedomScore = countryScores.internetFreedomScore
-
-      // Update visualizations based on selected country's scores
-      updateVisualizations(countryScores)
-    }
+    lastSelectedCountry = event.target.value
+    updateVisualizations()
   })
 
   // Function to update visualizations
-  function updateVisualizations (scores) {
-    console.log('Updating visualizations with new scores:', scores)
+  function updateVisualizations () {
+    if (lastSelectedCountry) {
+      const selectedCountryData = countryData[lastSelectedCountry]
+
+      if (selectedCountryData) {
+        accessScore = selectedCountryData.accessScore
+        contentScore = selectedCountryData.contentScore
+        rightsScore = selectedCountryData.rightsScore
+        internetFreedomScore = selectedCountryData.internetFreedomScore
+
+        // Update text and show it
+        accessScoreDisplay.textContent = `${accessScore} / ${maxAccessScore}`
+        contentScoreDisplay.textContent = `${contentScore} / ${maxContentScore}`
+        rightsScoreDisplay.textContent = `${rightsScore} / ${maxRightsScore}`
+        internetFreedomScoreDisplay.textContent = `${internetFreedomScore} / ${maxInternetFreedomScore}`
+        scoresSection.style.display = 'block'
+      }
+      console.log(
+        'Updating visualizations with new scores:',
+        selectedCountryData
+      )
+    }
+
     createBars()
     applyAccessEffect()
     applyBlurEffect()
-    clearCanvas() // Clear canvas when a new country is selected
+    clearCanvas()
   }
+
+  // Reset visualizations to "best scores" state
+  function resetVisualizations () {
+    accessScore = maxAccessScore
+    contentScore = maxContentScore
+    rightsScore = maxRightsScore
+    internetFreedomScore = maxInternetFreedomScore
+
+    // Remove the selected country's effect by re-creating the effect using the max scores, effectively turning off the visualization
+    createBars()
+    applyAccessEffect()
+    applyBlurEffect()
+    ctx.clearRect(0, 0, canvas.width, canvas.height) // Only clear the canvas, but don't clear the trails so that they can be shown if the toggle is switched back on
+
+    // No country selected
+    scoresSection.style.display = 'hidden'
+  }
+
+  // Toggle visualization on or off
+  function toggleVisualizations () {
+    isVisualizationOn = toggleVisualization.checked
+
+    if (isVisualizationOn) {
+      controls.style.display = 'block'
+      toggleLabel.textContent = 'Visualizations On'
+
+      // Reapply the last selected country's data
+      if (lastSelectedCountry) {
+        updateVisualizations()
+      }
+    } else {
+      controls.style.display = 'none'
+      toggleLabel.textContent = 'Visualizations Off'
+      resetVisualizations()
+    }
+  }
+
+  // Add event listener for the toggle
+  toggleVisualization.addEventListener('change', toggleVisualizations)
+  resetVisualizations()
 })

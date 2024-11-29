@@ -9,17 +9,31 @@
 <body>
 
   <div id="content-container">
-    <!-- Country Selection -->
-    <label for="country-select">Select a country:</label>
-    <select id="country-select">
-        <option value="" disabled selected>Select a country</option>
-    </select>
-    <div id="visualization-container">
-        <p><strong>Overall internet freedom score:</strong> <span id="internet-freedom-score">N/A</span></p>
-        <p><strong>Access score:</strong> <span id="access-score">N/A</span></p>
-        <p><strong>Content score:</strong> <span id="content-score">N/A</span></p>
-        <p><strong>Rights score:</strong> <span id="rights-score">N/A</span></p>
-    </div>
+
+    <!-- Toggle on/off visualization section -->
+    <div id="visualization-toggle" class="toggle-container">
+        <label class="switch">
+          <input type="checkbox" id="toggle-visualization">
+          <span class="slider"></span>
+        </label>
+        <span id="toggle-label">Visualizations Off</span>
+      </div>
+      
+      <div id="controls" style="display: none;">
+        <!-- Country Selection -->
+        <label for="country-select">Select a country:</label>
+        <select id="country-select">
+            <option value="" disabled selected>Select a country</option>
+        </select>
+        <div id="visualization-container">
+            <p><strong>Overall internet freedom score:</strong> <span id="internet-freedom-score">N/A</span></p>
+            <p><strong>Access score:</strong> <span id="access-score">N/A</span></p>
+            <p><strong>Content score:</strong> <span id="content-score">N/A</span></p>
+            <p><strong>Rights score:</strong> <span id="rights-score">N/A</span></p>
+        </div>
+      </div>
+    
+
     <!-- Introduction section -->
     <div class="introduction content" id="intro-section">
         <h1 class="title">Screened</h1>
