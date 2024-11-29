@@ -206,11 +206,8 @@ function resizeCanvas () {
 // Initial resize
 resizeCanvas()
 
-var trails = []
-
 // Function to clear the canvas completely on country switch
 function clearCanvas () {
-  trails = [] // Reset stored trails
   ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear the whole canvas
 }
 
@@ -237,6 +234,11 @@ function getOpacity (score) {
 
 // Event listener for tracking mouse movements
 document.addEventListener('mousemove', event => {
+  if (!isVisualizationOn) {
+    // Visualization isn't on, so don't capture mouse movements
+    return
+  }
+
   if (isMouseInsideRightsSection(event)) {
     if (rightsScore == maxRightsScore) {
       // Don't capture mouse movement if the score is maxInternetFreedomScore
@@ -249,11 +251,16 @@ document.addEventListener('mousemove', event => {
     // Capture mouse position at the specified interval
     if (currentTime - lastCaptureTime >= captureInterval) {
       const rect = rightsSection.getBoundingClientRect()
-      trails.push({
+      const trail = {
         x: event.clientX - rect.left, // Adjust position relative to section
         y: event.clientY - rect.top, // Adjust position relative to section
         opacity: getOpacity(rightsScore) // Opacity based on the rights score
-      })
+      }
+
+      ctx.fillStyle = `rgba(0, 0, 0, ${trail.opacity})` // Use black color for trails, set opacity based on rights score
+      ctx.beginPath()
+      ctx.arc(trail.x, trail.y, 5, 0, Math.PI * 2) // Draw the trail as a circle
+      ctx.fill()
       lastCaptureTime = currentTime
     }
   }
@@ -272,21 +279,6 @@ function isMouseInsideRightsSection (event) {
     mouseY <= rect.bottom
   )
 }
-
-// Render the mouse trails on the canvas
-function renderTrails () {
-  ctx.clearRect(0, 0, canvas.width, canvas.height) // Clear the canvas before drawing all trails
-  trails.forEach(trail => {
-    ctx.fillStyle = `rgba(0, 0, 0, ${trail.opacity})` // Use black color for trails, set opacity based on rights score
-    ctx.beginPath()
-    ctx.arc(trail.x, trail.y, 5, 0, Math.PI * 2) // Draw the trail as a circle
-    ctx.fill()
-  })
-  requestAnimationFrame(renderTrails) // Request the next animation frame
-}
-
-// Start rendering trails
-renderTrails()
 
 // Adjust canvas size and position on window resize
 window.addEventListener('resize', resizeCanvas)
@@ -335,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handle country selection
   countrySelect.addEventListener('change', event => {
     lastSelectedCountry = event.target.value
+    clearCanvas() // New country selected, so clear the canvas for the mouse trails
     updateVisualizations()
   })
 
@@ -365,7 +358,6 @@ document.addEventListener('DOMContentLoaded', () => {
     createBars()
     applyAccessEffect()
     applyBlurEffect()
-    clearCanvas()
   }
 
   // Reset visualizations to "best scores" state
@@ -379,7 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
     createBars()
     applyAccessEffect()
     applyBlurEffect()
-    ctx.clearRect(0, 0, canvas.width, canvas.height) // Only clear the canvas, but don't clear the trails so that they can be shown if the toggle is switched back on
 
     // No country selected
     scoresSection.style.display = 'hidden'
@@ -392,6 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isVisualizationOn) {
       controls.style.display = 'block'
       toggleLabel.textContent = 'Visualizations On'
+      canvas.style.display = 'block' // Show the mouse trails
 
       // Reapply the last selected country's data
       if (lastSelectedCountry) {
@@ -400,7 +392,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       controls.style.display = 'none'
       toggleLabel.textContent = 'Visualizations Off'
-      resetVisualizations()
+      canvas.style.display = 'none' // Hide the mouse trails
+      resetVisualizations() // Set it back to best scores state, i.e., no distortions
     }
   }
 
