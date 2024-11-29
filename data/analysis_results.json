@@ -1,0 +1,147 @@
+{
+    "internet_freedom_score": {
+        "range": 85,
+        "min_score": 9,
+        "max_score": 94,
+        "min_countries": [
+            "China",
+            "Myanmar"
+        ],
+        "max_countries": [
+            "Iceland"
+        ],
+        "mean": 52.861111111111114,
+        "median": 55.0,
+        "mode": 59
+    },
+    "statuses": {
+        "counts": {
+            "f": 19,
+            "pf": 32,
+            "nf": 21
+        },
+        "lists": {
+            "f": [
+                "Argentina",
+                "Armenia",
+                "Australia",
+                "Canada",
+                "Chile",
+                "Costa Rica",
+                "Estonia",
+                "France",
+                "Georgia",
+                "Germany",
+                "Iceland",
+                "Italy",
+                "Japan",
+                "Serbia",
+                "South Africa",
+                "Taiwan",
+                "The Netherlands",
+                "United Kingdom",
+                "United States"
+            ],
+            "pf": [
+                "Angola",
+                "Bangladesh",
+                "Brazil",
+                "Cambodia",
+                "Colombia",
+                "Ecuador",
+                "Ghana",
+                "Hungary",
+                "India",
+                "Indonesia",
+                "Iraq",
+                "Jordan",
+                "Kenya",
+                "Kyrgyzstan",
+                "Lebanon",
+                "Libya",
+                "Malawi",
+                "Malaysia",
+                "Mexico",
+                "Morocco",
+                "Nicaragua",
+                "Nigeria",
+                "Philippines",
+                "Singapore",
+                "South Korea",
+                "Sri Lanka",
+                "The Gambia",
+                "Tunisia",
+                "Uganda",
+                "Ukraine",
+                "Zambia",
+                "Zimbabwe"
+            ],
+            "nf": [
+                "Azerbaijan",
+                "Bahrain",
+                "Belarus",
+                "China",
+                "Cuba",
+                "Egypt",
+                "Ethiopia",
+                "Iran",
+                "Kazakhstan",
+                "Myanmar",
+                "Pakistan",
+                "Russia",
+                "Rwanda",
+                "Saudi Arabia",
+                "Sudan",
+                "Thailand",
+                "Turkey",
+                "United Arab Emirates",
+                "Uzbekistan",
+                "Venezuela",
+                "Vietnam"
+            ]
+        }
+    },
+    "access_score": {
+        "range": 23,
+        "min_score": 2,
+        "max_score": 25,
+        "min_countries": [
+            "Myanmar"
+        ],
+        "max_countries": [
+            "Estonia",
+            "Iceland"
+        ],
+        "mean": 15.430555555555555,
+        "median": 15.0,
+        "mode": 14
+    },
+    "content_score": {
+        "range": 32,
+        "min_score": 2,
+        "max_score": 34,
+        "min_countries": [
+            "China"
+        ],
+        "max_countries": [
+            "Iceland"
+        ],
+        "mean": 20.09722222222222,
+        "median": 21.5,
+        "mode": 29
+    },
+    "rights_score": {
+        "range": 36,
+        "min_score": 0,
+        "max_score": 36,
+        "min_countries": [
+            "China"
+        ],
+        "max_countries": [
+            "Estonia"
+        ],
+        "mean": 17.333333333333332,
+        "median": 18.0,
+        "mode": 18
+    }
+}
