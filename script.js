@@ -379,6 +379,54 @@ document.addEventListener('DOMContentLoaded', () => {
   // Open the dialog again when the question button is clicked
   questionBtn.addEventListener('click', openDialog)
 
+  // Set up dragging functionality for the visualization controls container
+  const draggableControlsElement = document.getElementById('controls-container')
+  let isDragging = false
+  let offsetX = 0
+  let offsetY = 0
+
+  // Helper function to ensure the container stays within the viewport
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
+
+  // Dragging functionality
+  draggableControlsElement.addEventListener('mousedown', event => {
+    isDragging = true
+    offsetX = event.clientX - draggableControlsElement.offsetLeft
+    offsetY = event.clientY - draggableControlsElement.offsetTop
+    draggableControlsElement.style.cursor = 'grabbing'
+  })
+
+  document.addEventListener('mousemove', event => {
+    if (isDragging) {
+      // Calculate the new position
+      const x = event.clientX - offsetX
+      const y = event.clientY - offsetY
+
+      // Get the viewport dimensions
+      const viewportWidth = window.innerWidth
+      const viewportHeight = window.innerHeight
+
+      // Get the element's dimensions
+      const elementWidth = draggableControlsElement.offsetWidth
+      const elementHeight = draggableControlsElement.offsetHeight
+
+      // Clamp the position within the viewport boundaries
+      const clampedX = clamp(x, 0, viewportWidth - elementWidth)
+      const clampedY = clamp(y, 0, viewportHeight - elementHeight)
+
+      // Set the new position
+      draggableControlsElement.style.left = `${clampedX}px`
+      draggableControlsElement.style.top = `${clampedY}px`
+    }
+  })
+
+  document.addEventListener('mouseup', () => {
+    if (isDragging) {
+      isDragging = false
+      draggableElement.style.cursor = 'grab'
+    }
+  })
+
   // Store the original text content for the access effect
   storeOriginalTextNodes()
 

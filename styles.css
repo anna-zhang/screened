@@ -110,15 +110,21 @@ canvas {
 }
 
 /* Toggle switch styling */
-#controls-container {
-    position: fixed; /* Fixed on the screen */
-    top: 20px; /* Distance from the top of the viewport */
-    right: 20px; /* Distance from the right of the viewport */
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
-    padding: 10px 15px;
+.draggable {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #f9f9f9;
+    padding: 10px;
     border: 1px solid #ccc;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for emphasis */
-    z-index: 1000; /* Ensure it stays above other elements */
+    border-radius: 5px;
+    cursor: grab;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.draggable:active {
+    cursor: grabbing;
 }
 
 .toggle-container {
