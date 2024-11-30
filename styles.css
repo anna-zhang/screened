@@ -51,7 +51,7 @@ canvas {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 9999;  /* Make sure the canvas is on top of the section */
+    z-index: 999;  /* Make sure the canvas is on top of the section */
     pointer-events: none; /* Ensure the canvas does not block interaction */
 }
   
@@ -61,6 +61,17 @@ canvas {
 }
 
 /* Toggle switch styling */
+#controls-container {
+    position: fixed; /* Fixed on the screen */
+    top: 20px; /* Distance from the top of the viewport */
+    right: 20px; /* Distance from the right of the viewport */
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for emphasis */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
 .toggle-container {
     display: flex;
     align-items: center;
