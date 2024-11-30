@@ -345,6 +345,35 @@ document.addEventListener('DOMContentLoaded', () => {
     'internet-freedom-score'
   )
 
+  // Set up introduction / help dialog
+  const closeDialogBtn = document.getElementById('close-dialog-btn')
+  const questionBtn = document.getElementById('question-btn')
+  const body = document.body
+
+  body.classList.add('dialog-open') // Dialog is open on first entry, disable interactions and scroll
+
+  // Function to open the dialog and disable interactions
+  const openDialog = () => {
+    dialog.style.display = 'flex'
+    dialog.style.opacity = 1
+    body.classList.add('dialog-open') // Disable interactions and scroll
+  }
+
+  // Function to close the dialog and enable interactions
+  const closeDialog = () => {
+    dialog.style.opacity = 0
+    setTimeout(() => {
+      dialog.style.display = 'none'
+    }, 300) // Wait for the fade-out animation to complete
+    body.classList.remove('dialog-open') // Enable interactions and scroll
+  }
+
+  // Close the dialog when the close button is clicked
+  closeDialogBtn.addEventListener('click', closeDialog)
+
+  // Open the dialog again when the question button is clicked
+  questionBtn.addEventListener('click', openDialog)
+
   // Store the original text content for the access effect
   storeOriginalTextNodes()
 
