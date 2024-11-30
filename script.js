@@ -12,7 +12,12 @@ var rightsScore = maxRightsScore // Adjust this from 0 to maxRightsScore (0 = es
 
 let isVisualizationOn = false
 let lastSelectedCountry = null
-const toggleVisualization = document.getElementById('toggle-visualization')
+const toggleVisualizationCheckbox = document.getElementById(
+  'toggle-visualization'
+)
+const toggleVisualizationContainer = document.getElementById(
+  'visualization-toggle-container'
+)
 const toggleLabel = document.getElementById('toggle-label')
 const controls = document.getElementById('controls')
 
@@ -406,7 +411,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handle country selection
   countrySelect.addEventListener('change', event => {
     lastSelectedCountry = event.target.value
+    toggleVisualizationCheckbox.checked = true
+    toggleVisualizationContainer.style.display = 'block'
+    isVisualizationOn = true
+    toggleLabel.textContent = 'Visualizations On' // Visualizations are turned on
     clearCanvas() // New country selected, so clear the canvas for the mouse trails
+    canvas.style.display = 'block' // Show the mouse trails
+    scoresSection.style.display = 'block' // Show the selected country's scores
     updateVisualizations()
   })
 
@@ -457,10 +468,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Toggle visualization on or off
   function toggleVisualizations () {
-    isVisualizationOn = toggleVisualization.checked
+    isVisualizationOn = toggleVisualizationCheckbox.checked
 
     if (isVisualizationOn) {
-      controls.style.display = 'block'
       toggleLabel.textContent = 'Visualizations On'
       canvas.style.display = 'block' // Show the mouse trails
 
@@ -469,7 +479,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateVisualizations()
       }
     } else {
-      controls.style.display = 'none'
       toggleLabel.textContent = 'Visualizations Off'
       canvas.style.display = 'none' // Hide the mouse trails
       resetVisualizations() // Set it back to best scores state, i.e., no distortions
@@ -477,6 +486,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Add event listener for the toggle
-  toggleVisualization.addEventListener('change', toggleVisualizations)
+  toggleVisualizationCheckbox.addEventListener('change', toggleVisualizations)
   resetVisualizations()
 })
