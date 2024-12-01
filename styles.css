@@ -49,6 +49,7 @@ a:visited {
     border: none;
     color: white;
     cursor: pointer;
+    font-size: 0.9em;
 }
   
 #explore-link:hover {
@@ -127,12 +128,13 @@ body.dialog-open #content-container {
     position: relative;
     max-width: 800px;
     margin: 30px auto;
-    padding: 20px;
+    padding: 50px 80px 50px 80px;
     background: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .title {
+    margin-top: 1.5em;
     text-align: center;
 }
   
@@ -173,7 +175,6 @@ canvas {
   
 #rights-section {
     position: relative;
-    padding: 20px;
 }
 
 #controls-container {
@@ -243,7 +244,7 @@ canvas {
 }
 
 input:checked + .slider {
-    background-color: #4caf50;
+    background-color: #0056b3;
 }
   
 input:checked + .slider:before {
