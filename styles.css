@@ -69,6 +69,7 @@ a:visited {
     color: white;
     cursor: pointer;
     font-size: 0.9em;
+    border-radius: 8px;
 }
   
 #explore-link:hover {
@@ -94,8 +95,8 @@ a:visited {
   
 .dialog-content {
     text-align: center;
-    max-width: 600px;
-    padding: 20px;
+    max-width: 768px;
+    padding: 20px 50px 20px 50px;
     background-color: #333;
     border-radius: 20px;
 }
@@ -105,12 +106,14 @@ a:visited {
 }
   
 #close-dialog-btn {
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     padding: 10px 20px;
     background-color: #0056b3;
     border: none;
     color: white;
     cursor: pointer;
+    border-radius: 8px;
 }
   
 #close-dialog-btn:hover {
@@ -150,6 +153,7 @@ body.dialog-open #content-container {
     padding: 50px 80px 50px 80px;
     background: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
 }
 
 .title {
