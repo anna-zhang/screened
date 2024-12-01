@@ -5,6 +5,11 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Smooth scrolling when jumping between sections */
+html {
+    scroll-behavior: smooth;
+}
+
 /* Dialog styles */
 .dialog-overlay {
     position: fixed;
