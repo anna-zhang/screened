@@ -1,13 +1,37 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
 
+button, input, select, option {
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
 /* Smooth scrolling when jumping between sections */
 html {
     scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: underline dotted; /* Dotted underline */
+    text-decoration-color: currentColor; /* Keeps the color of the underline consistent with the text */
+    color: inherit; /* Prevents color change after clicking */
+}
+
+a:visited {
+    color: inherit; /* Ensures the link does not change to purple after being clicked */
+}
+
+#explore-link-container {
+    text-align: center;
 }
 
 /* Dialog styles */
@@ -33,6 +57,10 @@ html {
     padding: 20px;
     background-color: #333;
     border-radius: 8px;
+}
+
+.dialog-content p {
+    text-align: left;
 }
   
 #close-dialog-btn {
@@ -62,7 +90,7 @@ body.dialog-open #content-container {
 .content {
     position: relative;
     max-width: 800px;
-    margin: 100px auto;
+    margin: 30px auto;
     padding: 20px;
     background: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -74,8 +102,6 @@ body.dialog-open #content-container {
   
 .introduction {
     position: relative;
-    line-height: 1.8;
-    font-size: 1.2em;
     word-wrap: break-word;
     z-index: 0;
 }
@@ -186,4 +212,8 @@ input:checked + .slider:before {
 #toggle-label {
     font-size: 16px;
     color: #333;
+}
+
+.flourish-footer-logo-container, .flourish-credit {
+    display: none;
 }

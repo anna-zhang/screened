@@ -70,8 +70,10 @@ function createBars () {
       const lineBar = document.createElement('div')
       lineBar.classList.add('line-bar')
 
-      // Use the full bounding box height of the text node
-      const characterHeight = rect.height
+      // Use just the font size
+      const characterHeight = parseFloat(
+        window.getComputedStyle(introSection).fontSize
+      )
 
       // Calculate bar height based on internetFreedomScore
       const barHeight =
