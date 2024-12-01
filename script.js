@@ -429,6 +429,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
+  const h1 = document.querySelector('h1')
+
+  // Position the controls directly below the h1
+  const h1Bottom = h1.offsetTop + h1.offsetHeight
+  draggableControlsElement.style.top = h1Bottom + 10 + 'px'
+  draggableControlsElement.style.left =
+    (window.innerWidth - draggableControlsElement.offsetWidth) / 2 + 'px'
+
   // Store the original text content for the access effect
   storeOriginalTextNodes()
 
