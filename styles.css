@@ -15,6 +15,10 @@ button, input, select, option {
     font-style: normal;
 }
 
+select {
+    font-weight: 800;
+}
+
 /* Smooth scrolling when jumping between sections */
 html {
     scroll-behavior: smooth;
@@ -32,6 +36,22 @@ a:visited {
 
 #explore-link-container {
     text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+
+#explore-link {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+  
+#explore-link:hover {
+    background-color: #003B7A;
 }
 
 /* Dialog styles */
@@ -56,7 +76,7 @@ a:visited {
     max-width: 600px;
     padding: 20px;
     background-color: #333;
-    border-radius: 8px;
+    border-radius: 20px;
 }
 
 .dialog-content p {
@@ -66,15 +86,30 @@ a:visited {
 #close-dialog-btn {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #0056b3;
     border: none;
-    border-radius: 4px;
     color: white;
     cursor: pointer;
 }
   
 #close-dialog-btn:hover {
+    background-color: #003B7A;
+}
+
+#question-btn {
     background-color: #0056b3;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: black;
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
+}
+  
+#question-btn:hover {
+    background-color: #003B7A;
 }
 
 /* Disable scrolling when dialog is open */
@@ -212,6 +247,16 @@ input:checked + .slider:before {
 #toggle-label {
     font-size: 16px;
     color: #333;
+}
+
+#visualization-container p {
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+}
+
+#visualization-container {
+    margin-top: 1.0em;
+    margin-bottom: 1.0em;
 }
 
 .flourish-footer-logo-container, .flourish-credit {

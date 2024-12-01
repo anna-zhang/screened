@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('mouseup', () => {
     if (isDragging) {
       isDragging = false
-      draggableElement.style.cursor = 'grab'
+      draggableControlsElement.style.cursor = 'grab'
     }
   })
 
