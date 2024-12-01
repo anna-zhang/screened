@@ -12,6 +12,7 @@ var rightsScore = maxRightsScore // Adjust this from 0 to maxRightsScore (0 = es
 
 let isVisualizationOn = false
 let lastSelectedCountry = null
+let isDetailsExpanded = false // Track if the details are expanded (visibility of country scores & visualization toggle)
 const toggleVisualizationCheckbox = document.getElementById(
   'toggle-visualization'
 )
@@ -20,6 +21,7 @@ const toggleVisualizationContainer = document.getElementById(
 )
 const toggleLabel = document.getElementById('toggle-label')
 const controls = document.getElementById('controls')
+const allDetailsContainer = document.getElementById('all-details-container')
 
 // === Internet Freedom Visualization for Intro Section ===
 const introSection = document.getElementById('intro-section')
@@ -351,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const internetFreedomScoreDisplay = document.getElementById(
     'internet-freedom-score'
   )
+  const detailsToggleButton = document.getElementById('details-toggle')
 
   // Set up introduction / help dialog
   const closeDialogBtn = document.getElementById('close-dialog-btn')
@@ -380,6 +383,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Open the dialog again when the question button is clicked
   questionBtn.addEventListener('click', openDialog)
+
+  // Function to handle the toggle action (expand/collapse details)
+  function toggleDetails () {
+    isDetailsExpanded = !isDetailsExpanded
+    if (isDetailsExpanded) {
+      allDetailsContainer.classList.remove('collapsed')
+      detailsToggleButton.textContent = '[-] Collapse Details' // Change text to 'Collapse'
+    } else {
+      allDetailsContainer.classList.add('collapsed')
+      detailsToggleButton.textContent = '[+] Expand Details' // Change text to 'Expand'
+    }
+  }
 
   // Set up dragging functionality for the visualization controls container
   const draggableControlsElement = document.getElementById('controls-container')
@@ -478,7 +493,16 @@ document.addEventListener('DOMContentLoaded', () => {
     scoresSection.style.display = 'block' // Show the selected country's scores
     updateVisualizations()
     isDragging = false
+    if (countrySelect.value) {
+      if (!isDetailsExpanded) {
+        toggleDetails() // When a country is selected, expand the details and show the toggle button
+        detailsToggleButton.style.display = 'block' // Show the details expand/collapse if not already visible (e.g., first load)
+      }
+    }
   })
+
+  // Add the click event listener to the toggle details button
+  detailsToggleButton.addEventListener('click', toggleDetails)
 
   // Function to update visualizations
   function updateVisualizations () {

@@ -271,13 +271,43 @@ input:checked + .slider:before {
 }
   
 #toggle-label {
-    font-size: 16px;
-    color: #333;
+    font-size: 0.8em;
+    margin: 2px;
+    color: black;
 }
 
 #visualization-container p {
     margin-top: 0.6em;
     margin-bottom: 0.6em;
+}
+
+/* Expand / collapse details: country score info and visualization toggle */
+
+#all-details-container {
+    display: block; /* Start expanded by default */
+    transition: all 0.3s ease;
+  }
+
+#all-details-container.collapsed {
+    display: none; /* Hide details when collapsed */
+}
+
+#details-button-container {
+    text-align: center;
+}
+
+#details-toggle {
+    display: none;
+    margin: 0.8em auto 0.3em auto; /* Horizontally center the button */
+    background-color: transparent;
+    border: none;
+    border-radius: 2px;
+    color: black;
+    cursor: pointer;
+}
+
+#details-toggle:hover {
+    text-decoration: underline dotted;
 }
 
 #visualization-container {

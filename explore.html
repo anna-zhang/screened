@@ -45,19 +45,25 @@
                 <option value="" disabled selected>Select a country</option>
             </select>
             <button id="question-btn">?</button>
-            <div id="visualization-container" style="display: none;">
-                <p><strong><a href="#intro-section">Internet Freedom</a>: </strong><span id="internet-freedom-score">N/A</span></p>
-                <p><strong><a href="#access-section">Obstacles to Access</a>: </strong><span id="access-score">N/A</span></p>
-                <p><strong><a href="#content-limits-section">Limits on Content</a>:</strong> <span id="content-score">N/A</span></p>
-                <p><strong><a href="#rights-section">Violations of User Rights</a>: </strong><span id="rights-score">N/A</span></p>
-                <p style="font-size: 0.75em"><i>higher scores = more free</i></p>
+            <div id="all-details-container">
+                <div id="visualization-container" style="display: none;">
+                    <p><strong><a href="#intro-section">Internet Freedom</a>: </strong><span id="internet-freedom-score">N/A</span></p>
+                    <p><strong><a href="#access-section">Obstacles to Access</a>: </strong><span id="access-score">N/A</span></p>
+                    <p><strong><a href="#content-limits-section">Limits on Content</a>:</strong> <span id="content-score">N/A</span></p>
+                    <p><strong><a href="#rights-section">Violations of User Rights</a>: </strong><span id="rights-score">N/A</span></p>
+                    <p style="font-size: 0.75em"><i>higher scores = more free</i></p>
+                </div>
+                <div id="visualization-toggle-container" class="toggle-container"  style="display: none;">
+                    <label class="switch">
+                    <input type="checkbox" id="toggle-visualization">
+                    <span class="slider"></span>
+                    </label>
+                    <span id="toggle-label">Visualizations Off</span>
+                </div>
             </div>
-            <div id="visualization-toggle-container" class="toggle-container"  style="display: none;">
-                <label class="switch">
-                <input type="checkbox" id="toggle-visualization">
-                <span class="slider"></span>
-                </label>
-                <span id="toggle-label">Visualizations Off</span>
+             <!-- Toggle for expanding/collapsing details -->
+            <div id="details-button-container">
+                <button id="details-toggle">[-] Collapse Details</button>
             </div>
         </div>
     </div>
@@ -189,6 +195,7 @@
         <h2>Appendix</h2>
         <p>This project is built on Freedom House's analysis of internet freedom around the world, with data sourced from their <a href="https://freedomhouse.org/report/freedom-net#:~:text=2024%20Country%20Score%20Data%20(.xlsx)" target="_blank" rel="noopener noreferrer">2024 Country Score Data (.xlsx)</a>. The vignettes in each section focus on the five countries with the lowest scores in those specific categories. The charts were created using <a href="https://flourish.studio/" target="_blank" rel="noopener noreferrer">Flourish</a>. The website and the score visualizations for the selected country were built using HTML, CSS, and JavaScript.</p>
         <p><b>Note: </b>Freedom House already offers excellent data visualizations, including this interactive <a href="https://freedomhouse.org/explore-the-map?type=fotn&year=2024" target="_blank" rel="noopener noreferrer">map</a> and <a href="https://freedomhouse.org/report/freedom-net/2024/struggle-trust-online" target="_blank" rel="noopener noreferrer">report</a>. My intention was not to replicate these existing formats. Instead, I aimed to present the data in a fresh, immersive way that brings the concept of internet freedom to life, emphasizing its urgency and impact on users.</p>
+        <p>Project by <a href="https://anna-zhang.com/" target="_blank" rel="noopener noreferrer">Anna Zhang</a>.</p>
     </div>
   </div>
   <script src="script.js"></script>
