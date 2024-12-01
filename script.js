@@ -477,6 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.style.display = 'block' // Show the mouse trails
     scoresSection.style.display = 'block' // Show the selected country's scores
     updateVisualizations()
+    isDragging = false
   })
 
   // Function to update visualizations
