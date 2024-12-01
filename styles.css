@@ -8,6 +8,25 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Only allow experience on desktop */
+.desktop-only {
+    display: block;
+}
+
+.mobile-warning {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-warning {
+        display: block;
+    }
+}
+
 button, input, select, option {
     font-family: "Source Sans 3", sans-serif;
     font-optical-sizing: auto;
