@@ -8,25 +8,6 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Only allow experience on desktop */
-.desktop-only {
-    display: block;
-}
-
-.mobile-warning {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .desktop-only {
-        display: none;
-    }
-
-    .mobile-warning {
-        display: block;
-    }
-}
-
 button, input, select, option {
     font-family: "Source Sans 3", sans-serif;
     font-optical-sizing: auto;
@@ -321,4 +302,140 @@ input:checked + .slider:before {
 
 .flourish-footer-logo-container, .flourish-credit {
     display: none;
+}
+
+.background {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+  }
+  
+.illustration {
+    position: absolute;
+    width: 100px;
+    z-index: 0;
+    opacity: 1; /* Set opacity to make the illustrations subtle */
+    pointer-events: none; /* Prevent interactions with the illustrations */
+}
+
+  /* Custom styles for the random positions and rotations */
+
+.illustration:nth-child(1) {
+  top: 5%;
+  right: 5%;
+  width: 200px;
+  transform: rotate(3deg);
+}
+
+.illustration:nth-child(2) {
+  top: 40%;
+  left: 90%;
+  width: 200px;
+  transform: rotate(0deg);
+}
+
+.illustration:nth-child(3) {
+    display: none;
+    bottom: 0%;
+    left: 45%;
+    width: 200px;
+    transform: rotate(0deg);
+}
+
+.illustration:nth-child(4) {
+    bottom: 0%;
+    left: 5%;
+    width: 120px;
+    transform: rotate(-15deg);
+}
+
+.illustration:nth-child(5) {
+    bottom: 0%;
+    right: 5%;
+    transform: rotate(-20deg);
+}
+
+.illustration:nth-child(6) {
+    top: 40%;
+    left: 0%;
+    width: 100px;
+    transform: rotate(20deg);
+}
+
+.illustration:nth-child(7) {
+    top: 2.5%;
+    left: 2%;
+    width: 180px;
+    transform: rotate(-30deg);
+}
+
+
+/* Only allow experience on desktop */
+.desktop-only {
+    display: block;
+}
+
+.mobile-warning {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-warning {
+        display: block;
+    }
+
+    .illustration:nth-child(1) {
+        top: 5%;
+        right: 5%;
+        width: 100px;
+        transform: rotate(3deg);
+      }
+      
+      .illustration:nth-child(2) {
+        display: none;
+        top: 40%;
+        left: 90%;
+        width: 100px;
+        transform: rotate(0deg);
+      }
+      
+      .illustration:nth-child(3) {
+        display: block;
+        bottom: 0%;
+        left: 35%;
+        width: 100px;
+        transform: rotate(0deg);
+      }
+      
+      .illustration:nth-child(4) {
+        bottom: 8%;
+        left: 5%;
+        width: 60px;
+        transform: rotate(-15deg);
+      }
+      
+      .illustration:nth-child(5) {
+        bottom: 0%;
+        right: 5%;
+        width: 50px;
+        transform: rotate(-20deg);
+      }
+      
+      .illustration:nth-child(6) {
+        display: none;
+        top: 40%;
+        left: 0%;
+        width: 50px;
+        transform: rotate(20deg);
+      }
+      
+      .illustration:nth-child(7) {
+        top: 2.5%;
+        left: 2%;
+        width: 90px;
+        transform: rotate(-30deg);
+      }
 }
