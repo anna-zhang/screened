@@ -304,47 +304,6 @@ input:checked + .slider:before {
     display: none;
 }
 
-.background {
-    position: relative;
-    height: 100vh; /* Full viewport height */
-  }
-  
-.photo {
-    position: absolute;
-    width: 100px;
-    z-index: 0;
-    opacity: 1; /* Set opacity to make the photos subtle */
-    pointer-events: none; /* Prevent interactions with the photos */
-}
-
-  /* Custom styles for the random positions and rotations */
-
-.photo:nth-child(1) {
-  top: 0%;
-  right: 0%;
-  width: 200px;
-}
-
-.photo:nth-child(2) {
-  bottom: 0%;
-  right: 5%;
-  width: 300px;
-}
-
-.photo:nth-child(3) {
-    top: 5%;
-    left: 5%;
-    width: 250px;
-}
-
-.photo:nth-child(4) {
-    bottom: 0%;
-    left: 0%;
-    width: 300px;
-}
-
-
-
 /* Only allow experience on desktop */
 .desktop-only {
     display: block;
@@ -366,33 +325,5 @@ input:checked + .slider:before {
         padding: 20px 40px 20px 40px;
         border-radius: 16px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .photo:nth-child(1) {
-        top: 5%;
-        right: 5%;
-        width: 100px;
-        transform: rotate(3deg);
-      }
-      
-    .photo:nth-child(2) {
-        bottom: 10%;
-        right: 10%;
-        width: 100px;
-        transform: rotate(10deg);
-    }
-      
-    .photo:nth-child(3) {
-        top: 5%;
-        left: 10%;
-        width: 300px;
-        transform: rotate(-5deg);
-    }
-      
-    .photo:nth-child(4) {
-        bottom: 8%;
-        left: 10%;
-        width: 200px;
-        transform: rotate(-15deg);
     }
 }
