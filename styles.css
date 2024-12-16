@@ -71,7 +71,7 @@ a:visited {
     align-items: center;
     opacity: 1;
     transition: opacity 0.3s ease;
-    z-index: 9999;
+    z-index: 100;
 }
   
 .dialog-content {
@@ -173,7 +173,7 @@ canvas {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 999;  /* Make sure the canvas is on top of the section */
+    z-index: 10;  /* Make sure the canvas is on top of the section */
     pointer-events: none; /* Ensure the canvas does not block interaction */
 }
   
@@ -189,14 +189,12 @@ canvas {
 /* Toggle switch styling */
 .draggable {
     position: fixed;
-    top: 20px;
-    left: 20px;
     background-color: #f9f9f9;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: grab;
-    z-index: 1000;
+    z-index: 50;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -325,5 +323,24 @@ input:checked + .slider:before {
         padding: 20px 40px 20px 40px;
         border-radius: 16px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+
+    #screened-section {
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Horizontally center */
+        align-items: center;    /* Vertically center */
+        height: 100vh;          /* Full viewport height */
+    }
+
+    #controls-container {
+        display: none;
     }
 }

@@ -444,11 +444,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  const h1 = document.querySelector('h1')
+  const title = document.querySelector('#title')
 
-  // Position the controls directly below the h1
-  const h1Bottom = h1.offsetTop + h1.offsetHeight
-  draggableControlsElement.style.top = h1Bottom + 10 + 'px'
+  // Position the controls directly below the h1 title
+  const titleBottom = title.offsetTop + title.offsetHeight
+  console.log('titleBottom: ', titleBottom)
+  draggableControlsElement.style.top = titleBottom + 10 + 'px'
   draggableControlsElement.style.left =
     (window.innerWidth - draggableControlsElement.offsetWidth) / 2 + 'px'
 
