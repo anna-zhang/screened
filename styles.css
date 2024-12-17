@@ -1,5 +1,6 @@
 body {
-    font-family: "Source Sans 3", sans-serif;
+    font-family: "Rubik", sans-serif;
+    line-height: 1.5em;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
@@ -9,7 +10,7 @@ body {
 }
 
 button, input, select, option {
-    font-family: "Source Sans 3", sans-serif;
+    font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
@@ -139,7 +140,15 @@ body.dialog-open #content-container {
 
 .title {
     margin-top: 1.5em;
+    font-size: 3em;
     text-align: center;
+    font-family: "Rubik Pixels", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.title a {
+    text-decoration: none;
 }
   
 .introduction {
@@ -184,6 +193,7 @@ canvas {
 #controls-container {
     width: 250px;
     text-align: center;
+    font-size: 0.85em;
 }
 
 /* Toggle switch styling */

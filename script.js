@@ -447,9 +447,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const title = document.querySelector('#title')
 
   // Position the controls directly below the h1 title
-  const titleBottom = title.offsetTop + title.offsetHeight
+  const titleBottom = title.getBoundingClientRect().bottom
   console.log('titleBottom: ', titleBottom)
-  draggableControlsElement.style.top = titleBottom + 10 + 'px'
+  draggableControlsElement.style.top =
+    titleBottom + parseInt(getComputedStyle(title).marginBottom) / 2 + 'px'
   draggableControlsElement.style.left =
     (window.innerWidth - draggableControlsElement.offsetWidth) / 2 + 'px'
 
