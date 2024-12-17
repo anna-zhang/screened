@@ -330,15 +330,17 @@ input:checked + .slider:before {
         display: block;
         z-index: 1000;
         background-color: white;
-        padding: 20px 40px 20px 40px;
+        padding: 1em 2em 1em 2em;
         border-radius: 16px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         position: relative;
+        max-width: 85vw;
     }
 
     html, body {
         height: 100%;
         margin: 0;
+        overflow: hidden; /* Disable scroll */
     }
 
     #screened-section {
